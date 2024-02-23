@@ -1,8 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package lab6;
+
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  *
@@ -10,11 +10,9 @@ package lab6;
  */
 public class lab6Frame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form lab6Frame
-     */
     public lab6Frame() {
         initComponents();
+
     }
 
     /**
@@ -33,7 +31,7 @@ public class lab6Frame extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        jb_agregarquipo = new javax.swing.JButton();
         jt_nombre = new javax.swing.JTextField();
         jt_equipo = new javax.swing.JTextField();
         jt_ciudad = new javax.swing.JTextField();
@@ -44,18 +42,18 @@ public class lab6Frame extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jSpinner1 = new javax.swing.JSpinner();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jb_agregarjugador = new javax.swing.JButton();
+        jt_nombrej = new javax.swing.JTextField();
+        edad = new javax.swing.JSpinner();
+        cb_posicion = new javax.swing.JComboBox<>();
         Transferencia = new javax.swing.JDialog();
         jPanel3 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        listajugadores = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
-        jButton6 = new javax.swing.JButton();
+        arbol = new javax.swing.JTree();
+        bt_transferir = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         principal = new javax.swing.JPanel();
@@ -95,9 +93,9 @@ public class lab6Frame extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel8.setText("Estadio:");
 
-        jButton4.setBackground(new java.awt.Color(153, 153, 255));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jButton4.setText("A G R E G A R");
+        jb_agregarquipo.setBackground(new java.awt.Color(153, 153, 255));
+        jb_agregarquipo.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jb_agregarquipo.setText("A G R E G A R");
 
         jt_nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,7 +109,7 @@ public class lab6Frame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton4)
+                .addComponent(jb_agregarquipo)
                 .addGap(198, 198, 198))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,7 +159,7 @@ public class lab6Frame extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jt_estadio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
-                .addComponent(jButton4)
+                .addComponent(jb_agregarquipo)
                 .addGap(15, 15, 15))
         );
 
@@ -196,20 +194,22 @@ public class lab6Frame extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(102, 0, 0));
         jLabel12.setText("Posición:");
 
-        jButton5.setBackground(new java.awt.Color(102, 255, 102));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        jButton5.setText("A G R E G A R");
+        jb_agregarjugador.setBackground(new java.awt.Color(102, 255, 102));
+        jb_agregarjugador.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jb_agregarjugador.setText("A G R E G A R");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jt_nombrej.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jt_nombrejActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Portero ", "Defensa", "MedioCampista", "Delantero" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        edad.setModel(new javax.swing.SpinnerNumberModel(15, 15, 45, 1));
+
+        cb_posicion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Portero ", "Defensa", "MedioCampista", "Delantero" }));
+        cb_posicion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cb_posicionActionPerformed(evt);
             }
         });
 
@@ -229,16 +229,16 @@ public class lab6Frame extends javax.swing.JFrame {
                             .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1)))
+                            .addComponent(edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jt_nombrej)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(58, 58, 58)
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cb_posicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(207, 207, 207)
-                        .addComponent(jButton5)))
+                        .addComponent(jb_agregarjugador)))
                 .addContainerGap(147, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -249,17 +249,17 @@ public class lab6Frame extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jt_nombrej, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_posicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(jButton5)
+                .addComponent(jb_agregarjugador)
                 .addGap(47, 47, 47))
         );
 
@@ -280,14 +280,20 @@ public class lab6Frame extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(0, 102, 0));
         jLabel13.setText("T R A N S F E R E N C I A S");
 
-        jScrollPane1.setViewportView(jList1);
+        listajugadores.setModel(new DefaultListModel());
+        jScrollPane1.setViewportView(listajugadores);
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("EQUIPOS");
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane2.setViewportView(jTree1);
+        arbol.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane2.setViewportView(arbol);
 
-        jButton6.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jButton6.setText("Transferir-->");
+        bt_transferir.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        bt_transferir.setText("Transferir-->");
+        bt_transferir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_transferirActionPerformed(evt);
+            }
+        });
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel14.setText("Jugadores");
@@ -303,7 +309,7 @@ public class lab6Frame extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton6)
+                .addComponent(bt_transferir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51))
@@ -334,7 +340,7 @@ public class lab6Frame extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(125, 125, 125)
-                        .addComponent(jButton6)))
+                        .addComponent(bt_transferir)))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
@@ -365,6 +371,11 @@ public class lab6Frame extends javax.swing.JFrame {
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         jToolBar1.add(jButton2);
 
         jButton1.setBackground(new java.awt.Color(255, 153, 153));
@@ -373,6 +384,11 @@ public class lab6Frame extends javax.swing.JFrame {
         jButton1.setText("Crear Equipos");
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jToolBar1.add(jButton1);
 
         jButton3.setBackground(new java.awt.Color(255, 153, 153));
@@ -381,6 +397,11 @@ public class lab6Frame extends javax.swing.JFrame {
         jButton3.setText("Transferencias");
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
         jToolBar1.add(jButton3);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lab6/elementos-de-dibujos-animados-de-futbol-pkjh10-removebg-preview.png"))); // NOI18N
@@ -435,10 +456,20 @@ public class lab6Frame extends javax.swing.JFrame {
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem1.setText("Crear Equipos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem1);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_J, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem2.setText("Crear Jugadores");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem2);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -472,20 +503,44 @@ public class lab6Frame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
+        hacerTransferencias();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jt_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jt_nombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jt_nombreActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cb_posicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_posicionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_cb_posicionActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jt_nombrejActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jt_nombrejActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jt_nombrejActionPerformed
+
+    private void bt_transferirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_transferirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_transferirActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        crearEquipos();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        crearJugadores();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        crearJugadores();
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        crearEquipos();
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        hacerTransferencias();
+    }//GEN-LAST:event_jButton3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -522,17 +577,39 @@ public class lab6Frame extends javax.swing.JFrame {
         });
     }
 
+    public void crearEquipos() {
+        Equipos.setModal(true);
+        Equipos.pack();
+        Equipos.setLocationRelativeTo(null);
+        Equipos.setVisible(true);
+    }
+
+    public void crearJugadores() {
+        Jugadores.setModal(true);
+        Jugadores.pack();
+        Jugadores.setLocationRelativeTo(null);
+        Jugadores.setVisible(true);
+    }
+
+    public void hacerTransferencias() {
+        Transferencia.setModal(true);
+        Transferencia.pack();
+        Transferencia.setLocationRelativeTo(null);
+        Transferencia.setVisible(true);
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog Equipos;
     private javax.swing.JDialog Jugadores;
     private javax.swing.JDialog Transferencia;
+    private javax.swing.JTree arbol;
+    private javax.swing.JButton bt_transferir;
+    private javax.swing.JComboBox<String> cb_posicion;
+    private javax.swing.JSpinner edad;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -548,7 +625,6 @@ public class lab6Frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
@@ -560,14 +636,21 @@ public class lab6Frame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JTree jTree1;
+    private javax.swing.JButton jb_agregarjugador;
+    private javax.swing.JButton jb_agregarquipo;
     private javax.swing.JTextField jt_ciudad;
     private javax.swing.JTextField jt_equipo;
     private javax.swing.JTextField jt_estadio;
     private javax.swing.JTextField jt_nombre;
+    private javax.swing.JTextField jt_nombrej;
+    private javax.swing.JList<String> listajugadores;
     private javax.swing.JPanel principal;
     // End of variables declaration//GEN-END:variables
+public static ArrayList<Jugadores> jugador = new ArrayList();
+    public static ArrayList<Equipos> equipo = new ArrayList();
+    DefaultMutableTreeNode nodoS;
+    Jugadores jugadort;
+    Equipos equipot;
+
 }
