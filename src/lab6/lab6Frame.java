@@ -651,7 +651,7 @@ public class lab6Frame extends javax.swing.JFrame {
 
             if (!registrado) {
                 DefaultMutableTreeNode nodoPais = new DefaultMutableTreeNode(equipos.getPais());
-                DefaultMutableTreeNode nodoEquipo = new DefaultMutableTreeNode(equipo);
+                DefaultMutableTreeNode nodoEquipo = new DefaultMutableTreeNode(equipos.getEquipo());
                 nodoPais.add(nodoEquipo);
                 raiz.add(nodoPais);
             }
@@ -698,11 +698,7 @@ public class lab6Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_listaJMouseClicked
 
     private void arbolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_arbolMouseClicked
-        if (arbol.getSelectionCount()>= 0) {
-            if (evt.getButton() == 3) {
-                pp_equipo.show(arbol, evt.getX(), evt.getY());
-            }
-        }
+     
     }//GEN-LAST:event_arbolMouseClicked
 
     /**
