@@ -329,6 +329,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="A G R E G A R"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jb_agregarjugadorMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jt_nombrej">
               <Events>
@@ -369,7 +372,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jPanel3" alignment="0" pref="564" max="32767" attributes="0"/>
+              <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -458,12 +461,15 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JList" name="listajugadores">
+                <Component class="javax.swing.JList" name="listaJ">
                   <Properties>
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new DefaultListModel()" type="code"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="listaJMouseClicked"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
@@ -483,6 +489,9 @@
                       <TreeModel code="EQUIPOS"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="arbolMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -573,6 +582,40 @@
             </Component>
           </SubComponents>
         </Container>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPopupMenu" name="pp_jugadores">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+      <SubComponents>
+        <MenuItem class="javax.swing.JMenuItem" name="modificar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Modificar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modificarActionPerformed"/>
+          </Events>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="eliminar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Eliminar&#x274c;"/>
+          </Properties>
+        </MenuItem>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPopupMenu" name="pp_equipo">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+      <SubComponents>
+        <MenuItem class="javax.swing.JMenuItem" name="eliminararbol">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Eliminar&#x274c;"/>
+          </Properties>
+        </MenuItem>
       </SubComponents>
     </Container>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">

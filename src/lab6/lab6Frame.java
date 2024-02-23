@@ -52,7 +52,7 @@ public class lab6Frame extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listajugadores = new javax.swing.JList<>();
+        listaJ = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         arbol = new javax.swing.JTree();
         bt_transferir = new javax.swing.JButton();
@@ -61,6 +61,11 @@ public class lab6Frame extends javax.swing.JFrame {
         Ayuda = new javax.swing.JDialog();
         jPanel4 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
+        pp_jugadores = new javax.swing.JPopupMenu();
+        modificar = new javax.swing.JMenuItem();
+        eliminar = new javax.swing.JMenuItem();
+        pp_equipo = new javax.swing.JPopupMenu();
+        eliminararbol = new javax.swing.JMenuItem();
         principal = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
@@ -207,6 +212,11 @@ public class lab6Frame extends javax.swing.JFrame {
         jb_agregarjugador.setBackground(new java.awt.Color(102, 255, 102));
         jb_agregarjugador.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jb_agregarjugador.setText("A G R E G A R");
+        jb_agregarjugador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_agregarjugadorMouseClicked(evt);
+            }
+        });
 
         jt_nombrej.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -290,11 +300,21 @@ public class lab6Frame extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(0, 102, 0));
         jLabel13.setText("T R A N S F E R E N C I A S");
 
-        listajugadores.setModel(new DefaultListModel());
-        jScrollPane1.setViewportView(listajugadores);
+        listaJ.setModel(new DefaultListModel());
+        listaJ.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaJMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(listaJ);
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("EQUIPOS");
         arbol.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        arbol.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                arbolMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(arbol);
 
         bt_transferir.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
@@ -358,7 +378,7 @@ public class lab6Frame extends javax.swing.JFrame {
         Transferencia.getContentPane().setLayout(TransferenciaLayout);
         TransferenciaLayout.setHorizontalGroup(
             TransferenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         TransferenciaLayout.setVerticalGroup(
             TransferenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,6 +418,20 @@ public class lab6Frame extends javax.swing.JFrame {
             AyudaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        modificar.setText("Modificar");
+        modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarActionPerformed(evt);
+            }
+        });
+        pp_jugadores.add(modificar);
+
+        eliminar.setText("Eliminar❌");
+        pp_jugadores.add(eliminar);
+
+        eliminararbol.setText("Eliminar❌");
+        pp_equipo.add(eliminararbol);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -631,6 +665,46 @@ public class lab6Frame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jb_agregarquipoActionPerformed
 
+    private void jb_agregarjugadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_agregarjugadorMouseClicked
+        int edades = (Integer) edad.getValue();
+        if (!jt_nombrej.getText().matches(".*\\d.*")) {
+            jugador.add(new Jugadores(jt_nombrej.getText(), (String) cb_posicion.getSelectedItem(), (Integer) edad.getValue()));
+            DefaultListModel modelo = (DefaultListModel) listaJ.getModel();
+            modelo.setSize(0);
+            for (Jugadores jugador : jugador) {
+                modelo.addElement(jugador);
+            }
+            JOptionPane.showMessageDialog(null, "El jugador se agrego con exito.");
+
+            jt_nombrej.setText("");
+            cb_posicion.setSelectedIndex(0);
+            edad.setValue(15);
+            listaJ.setModel(modelo);
+
+        }
+    }//GEN-LAST:event_jb_agregarjugadorMouseClicked
+
+    private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
+
+
+    }//GEN-LAST:event_modificarActionPerformed
+
+    private void listaJMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaJMouseClicked
+        if (listaJ.getSelectedIndex() >= 0) {
+            if (evt.getButton() == 3) {
+                pp_jugadores.show(listaJ, evt.getX(), evt.getY());
+            }
+        }
+    }//GEN-LAST:event_listaJMouseClicked
+
+    private void arbolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_arbolMouseClicked
+        if (arbol.getSelectionCount()>= 0) {
+            if (evt.getButton() == 3) {
+                pp_equipo.show(arbol, evt.getX(), evt.getY());
+            }
+        }
+    }//GEN-LAST:event_arbolMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -704,6 +778,8 @@ public class lab6Frame extends javax.swing.JFrame {
     private javax.swing.JButton bt_transferir;
     private javax.swing.JComboBox<String> cb_posicion;
     private javax.swing.JSpinner edad;
+    private javax.swing.JMenuItem eliminar;
+    private javax.swing.JMenuItem eliminararbol;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -743,7 +819,10 @@ public class lab6Frame extends javax.swing.JFrame {
     private javax.swing.JTextField jt_estadio;
     private javax.swing.JTextField jt_nombre;
     private javax.swing.JTextField jt_nombrej;
-    private javax.swing.JList<String> listajugadores;
+    private javax.swing.JList<String> listaJ;
+    private javax.swing.JMenuItem modificar;
+    private javax.swing.JPopupMenu pp_equipo;
+    private javax.swing.JPopupMenu pp_jugadores;
     private javax.swing.JPanel principal;
     // End of variables declaration//GEN-END:variables
 public static ArrayList<Jugadores> jugador = new ArrayList();
