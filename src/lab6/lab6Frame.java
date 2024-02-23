@@ -2,7 +2,9 @@ package lab6;
 
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -56,10 +58,13 @@ public class lab6Frame extends javax.swing.JFrame {
         bt_transferir = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        Ayuda = new javax.swing.JDialog();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
         principal = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
-        jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -96,6 +101,11 @@ public class lab6Frame extends javax.swing.JFrame {
         jb_agregarquipo.setBackground(new java.awt.Color(153, 153, 255));
         jb_agregarquipo.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jb_agregarquipo.setText("A G R E G A R");
+        jb_agregarquipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_agregarquipoActionPerformed(evt);
+            }
+        });
 
         jt_nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,11 +129,11 @@ public class lab6Frame extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jt_equipo, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jt_equipo, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jt_nombre))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -145,20 +155,20 @@ public class lab6Frame extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
-                    .addComponent(jt_equipo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jt_ciudad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                    .addComponent(jt_equipo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jt_ciudad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jt_estadio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(jt_estadio, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addComponent(jb_agregarquipo)
                 .addGap(15, 15, 15))
         );
@@ -355,6 +365,40 @@ public class lab6Frame extends javax.swing.JFrame {
             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        jPanel4.setBackground(new java.awt.Color(153, 0, 51));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI Emoji", 3, 48)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Apiadate de mi Juan 😭😭😭");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(58, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout AyudaLayout = new javax.swing.GroupLayout(Ayuda.getContentPane());
+        Ayuda.getContentPane().setLayout(AyudaLayout);
+        AyudaLayout.setHorizontalGroup(
+            AyudaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        AyudaLayout.setVerticalGroup(
+            AyudaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         principal.setBackground(new java.awt.Color(255, 204, 204));
@@ -363,6 +407,19 @@ public class lab6Frame extends javax.swing.JFrame {
 
         jToolBar1.setBackground(new java.awt.Color(255, 102, 102));
         jToolBar1.setRollover(true);
+
+        jButton1.setBackground(new java.awt.Color(255, 153, 153));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Crear Equipos");
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jToolBar1.add(jButton1);
 
         jButton2.setBackground(new java.awt.Color(255, 153, 153));
         jButton2.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
@@ -377,19 +434,6 @@ public class lab6Frame extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButton2);
-
-        jButton1.setBackground(new java.awt.Color(255, 153, 153));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Crear Equipos");
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-        jToolBar1.add(jButton1);
 
         jButton3.setBackground(new java.awt.Color(255, 153, 153));
         jButton3.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
@@ -445,7 +489,7 @@ public class lab6Frame extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addContainerGap(199, Short.MAX_VALUE))
                     .addGroup(principalLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
+                        .addGap(44, 44, 44)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())))
         );
@@ -484,6 +528,11 @@ public class lab6Frame extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Ayuda");
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu4MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -542,6 +591,46 @@ public class lab6Frame extends javax.swing.JFrame {
         hacerTransferencias();
     }//GEN-LAST:event_jButton3MouseClicked
 
+    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+        verAyuda();
+    }//GEN-LAST:event_jMenu4MouseClicked
+
+    private void jb_agregarquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_agregarquipoActionPerformed
+        if (jt_nombre.getText().matches(".*\\d.*") || jt_equipo.getText().matches(".*\\d.*")) {
+            JOptionPane.showMessageDialog(null, "Ingrese solo letras.");
+        } else {
+            boolean registrado = false;
+            DefaultTreeModel modelo = (DefaultTreeModel) arbol.getModel();
+            DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modelo.getRoot();
+            Equipos equipos = new Equipos(jt_nombre.getText(), jt_equipo.getText(), jt_ciudad.getText(), jt_estadio.getText());
+            equipo.add(equipos);
+
+            for (int i = 0; i < raiz.getChildCount(); i++) {
+                DefaultMutableTreeNode nodoPrincipal = (DefaultMutableTreeNode) raiz.getChildAt(i);
+                if (nodoPrincipal.getUserObject().equals(equipos.getPais())) {
+                    DefaultMutableTreeNode nodoEquipo = new DefaultMutableTreeNode(equipo);
+                    nodoPrincipal.add(nodoEquipo);
+                    registrado = true;
+                    break;
+                }
+            }
+
+            if (!registrado) {
+                DefaultMutableTreeNode nodoPais = new DefaultMutableTreeNode(equipos.getPais());
+                DefaultMutableTreeNode nodoEquipo = new DefaultMutableTreeNode(equipo);
+                nodoPais.add(nodoEquipo);
+                raiz.add(nodoPais);
+            }
+
+            modelo.reload();
+            jt_equipo.setText("");
+            jt_nombre.setText("");
+            jt_ciudad.setText("");
+            jt_estadio.setText("");
+            JOptionPane.showMessageDialog(null, "El equipo se agrego con exito:)");
+        }
+    }//GEN-LAST:event_jb_agregarquipoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -598,8 +687,16 @@ public class lab6Frame extends javax.swing.JFrame {
         Transferencia.setVisible(true);
     }
 
+    public void verAyuda() {
+        Ayuda.setModal(true);
+        Ayuda.pack();
+        Ayuda.setLocationRelativeTo(null);
+        Ayuda.setVisible(true);
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog Ayuda;
     private javax.swing.JDialog Equipos;
     private javax.swing.JDialog Jugadores;
     private javax.swing.JDialog Transferencia;
@@ -617,6 +714,7 @@ public class lab6Frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -634,6 +732,7 @@ public class lab6Frame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar jToolBar1;
