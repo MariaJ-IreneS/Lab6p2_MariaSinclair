@@ -700,21 +700,29 @@ public class lab6Frame extends javax.swing.JFrame {
         String nombre = "";
         int edad = 0;
         boolean f = true;
+
         if (listaJ.getSelectedIndex() >= 0) {
             while (f) {
                 nombre = JOptionPane.showInputDialog(this, "Ingrese nuevo nombre: ");
                 if (nombre.matches("[a-zA-Z]+")) {
                     f = false;
                 }
-            }//fin while
+            }
+
             f = true;
+
             while (f) {
                 try {
                     edad = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese nueva edad: "));
-                    f = false;
-                } catch (Exception e) {
+                    if (edad >= 15 && edad <= 45) {
+                        f = false;
+                    } else {
+                        JOptionPane.showMessageDialog(this, "La edad debe estar entre 15 y 45");
+                    }
+                } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(this, "Edad Incorrecta");
                     f = true;
+
                 }
             }//fin while
 
@@ -762,7 +770,16 @@ public class lab6Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarActionPerformed
 
     private void bt_transferirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_transferirMouseClicked
-       
+        if (listaJ.getSelectedIndex() >= 0 && arbol.getSelectionPath() != null) {
+            if (nodoS.getUserObject() instanceof Equipos) {
+                DefaultListModel modelo = (DefaultListModel) listaJ.getModel();
+                Jugadores x = (Jugadores) modelo.getElementAt(listaJ.getSelectedIndex());
+                DefaultMutableTreeNode nodoJ = new DefaultMutableTreeNode(x);
+                nodoS.add(nodoJ);
+                DefaultTreeModel modelo2 = (DefaultTreeModel) arbol.getModel();
+                modelo2.reload();
+            }
+        }
     }//GEN-LAST:event_bt_transferirMouseClicked
 
     /**
@@ -888,7 +905,6 @@ public class lab6Frame extends javax.swing.JFrame {
 public static ArrayList<Jugadores> jugador = new ArrayList();
     public static ArrayList<Equipos> equipo = new ArrayList();
     DefaultMutableTreeNode nodoS;
-    Jugadores jugadort;
     Equipos equipot;
 
 }
