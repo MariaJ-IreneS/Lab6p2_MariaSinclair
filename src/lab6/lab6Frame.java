@@ -11,7 +11,7 @@ import javax.swing.tree.DefaultTreeModel;
  * @author Irene Sinclair
  */
 public class lab6Frame extends javax.swing.JFrame {
-    
+
     public lab6Frame() {
         initComponents();
 
@@ -320,9 +320,9 @@ public class lab6Frame extends javax.swing.JFrame {
 
         bt_transferir.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         bt_transferir.setText("Transferir-->");
-        bt_transferir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_transferirActionPerformed(evt);
+        bt_transferir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_transferirMouseClicked(evt);
             }
         });
 
@@ -612,10 +612,6 @@ public class lab6Frame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jt_nombrejActionPerformed
 
-    private void bt_transferirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_transferirActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bt_transferirActionPerformed
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         crearEquipos();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -649,7 +645,7 @@ public class lab6Frame extends javax.swing.JFrame {
             DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modelo.getRoot();
             Equipos equipos = new Equipos(jt_nombre.getText(), jt_equipo.getText(), jt_ciudad.getText(), jt_estadio.getText());
             equipo.add(equipos);
-            
+
             for (int i = 0; i < raiz.getChildCount(); i++) {
                 DefaultMutableTreeNode nodoPrincipal = (DefaultMutableTreeNode) raiz.getChildAt(i);
                 if (nodoPrincipal.getUserObject().equals(equipos.getPais())) {
@@ -659,14 +655,14 @@ public class lab6Frame extends javax.swing.JFrame {
                     break;
                 }
             }
-            
+
             if (!registrado) {
                 DefaultMutableTreeNode nodoPais = new DefaultMutableTreeNode(equipos.getPais());
                 DefaultMutableTreeNode nodoEquipo = new DefaultMutableTreeNode(equipo.get(equipo.size() - 1));
                 nodoPais.add(nodoEquipo);
                 raiz.add(nodoPais);
             }
-            
+
             modelo.reload();
             jt_equipo.setText("");
             jt_nombre.setText("");
@@ -687,12 +683,12 @@ public class lab6Frame extends javax.swing.JFrame {
                     modelo.addElement(jugador);
                 }
                 JOptionPane.showMessageDialog(null, "El jugador se agrego con exito.");
-                
+
                 jt_nombrej.setText("");
                 cb_posicion.setSelectedIndex(0);
                 edad.setValue(15);
                 listaJ.setModel(modelo);
-                
+
             }
         } else {
             JOptionPane.showMessageDialog(this, "Edad debe ser entre 15 y 45.");
@@ -701,8 +697,32 @@ public class lab6Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_agregarjugadorMouseClicked
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
-        
+        String nombre = "";
+        int edad = 0;
+        boolean f = true;
+        if (listaJ.getSelectedIndex() >= 0) {
+            while (f) {
+                nombre = JOptionPane.showInputDialog(this, "Ingrese nuevo nombre: ");
+                if (nombre.matches("[a-zA-Z]+")) {
+                    f = false;
+                }
+            }//fin while
+            f = true;
+            while (f) {
+                try {
+                    edad = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese nueva edad: "));
+                    f = false;
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Edad Incorrecta");
+                    f = true;
+                }
+            }//fin while
 
+            DefaultListModel modelo = (DefaultListModel) listaJ.getModel();
+            ((Jugadores) modelo.get(listaJ.getSelectedIndex())).setNombre(nombre);
+            ((Jugadores) modelo.get(listaJ.getSelectedIndex())).setEdad(edad);
+            listaJ.setModel(modelo);
+        }
     }//GEN-LAST:event_modificarActionPerformed
 
     private void listaJMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaJMouseClicked
@@ -714,14 +734,15 @@ public class lab6Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_listaJMouseClicked
 
     private void arbolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_arbolMouseClicked
-        
+        int row = arbol.getClosestRowForLocation(evt.getX(), evt.getY());
+        arbol.setSelectionRow(row);
+        nodoS = (DefaultMutableTreeNode) arbol.getSelectionPath().getLastPathComponent();
+
+        if (nodoS.getUserObject() instanceof Equipos) {
+            equipot = (Equipos) nodoS.getUserObject();
+        }
         if (evt.getButton() == 3) {
-            int row = arbol.getClosestRowForLocation(evt.getX(), evt.getY());
-            arbol.setSelectionRow(row);
-            
-            nodoS = (DefaultMutableTreeNode) arbol.getSelectionPath().getLastPathComponent();
             if (nodoS.getUserObject() instanceof Equipos) {
-                equipot = (Equipos) nodoS.getUserObject();
                 pp_equipo.show(evt.getComponent(), evt.getX(), evt.getY());
             }
         }
@@ -739,6 +760,10 @@ public class lab6Frame extends javax.swing.JFrame {
         modelo.removeElementAt(listaJ.getSelectedIndex());
         listaJ.setModel(modelo);
     }//GEN-LAST:event_eliminarActionPerformed
+
+    private void bt_transferirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_transferirMouseClicked
+       
+    }//GEN-LAST:event_bt_transferirMouseClicked
 
     /**
      * @param args the command line arguments
@@ -774,28 +799,28 @@ public class lab6Frame extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void crearEquipos() {
         Equipos.setModal(true);
         Equipos.pack();
         Equipos.setLocationRelativeTo(null);
         Equipos.setVisible(true);
     }
-    
+
     public void crearJugadores() {
         Jugadores.setModal(true);
         Jugadores.pack();
         Jugadores.setLocationRelativeTo(null);
         Jugadores.setVisible(true);
     }
-    
+
     public void hacerTransferencias() {
         Transferencia.setModal(true);
         Transferencia.pack();
         Transferencia.setLocationRelativeTo(null);
         Transferencia.setVisible(true);
     }
-    
+
     public void verAyuda() {
         Ayuda.setModal(true);
         Ayuda.pack();
@@ -865,5 +890,5 @@ public static ArrayList<Jugadores> jugador = new ArrayList();
     DefaultMutableTreeNode nodoS;
     Jugadores jugadort;
     Equipos equipot;
-    
+
 }
