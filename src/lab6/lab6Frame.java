@@ -15,6 +15,7 @@ public class lab6Frame extends javax.swing.JFrame {
     public lab6Frame() {
         initComponents();
 
+        //Ya 
     }
 
     /**
@@ -698,7 +699,8 @@ public class lab6Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_listaJMouseClicked
 
     private void arbolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_arbolMouseClicked
-     
+
+
     }//GEN-LAST:event_arbolMouseClicked
 
     /**
@@ -762,6 +764,22 @@ public class lab6Frame extends javax.swing.JFrame {
         Ayuda.pack();
         Ayuda.setLocationRelativeTo(null);
         Ayuda.setVisible(true);
+    }
+
+    public static boolean validarSoloLetras(String texto) {
+        char[] numeros = "0123654789".toCharArray();
+        char[] letrasTexto = texto.toCharArray();
+        ArrayList<Character> listaTexto = new ArrayList();
+        for (char c : letrasTexto) {
+            listaTexto.add(c);
+        }
+
+        for (int i = 0; i < numeros.length; i++) {
+            if (listaTexto.contains(i)) {
+                return false;
+            }
+        }
+        return true;
     }
 
 
