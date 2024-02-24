@@ -11,11 +11,11 @@ import javax.swing.tree.DefaultTreeModel;
  * @author Irene Sinclair
  */
 public class lab6Frame extends javax.swing.JFrame {
-
+    
     public lab6Frame() {
         initComponents();
 
-        //Ya 
+        //Ya llegue a la casa Juan
     }
 
     /**
@@ -225,7 +225,7 @@ public class lab6Frame extends javax.swing.JFrame {
             }
         });
 
-        edad.setModel(new javax.swing.SpinnerNumberModel(15, 15, 45, 1));
+        edad.setModel(new javax.swing.SpinnerNumberModel(15, null, null, 1));
 
         cb_posicion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Portero ", "Defensa", "MedioCampista", "Delantero" }));
         cb_posicion.addActionListener(new java.awt.event.ActionListener() {
@@ -429,9 +429,19 @@ public class lab6Frame extends javax.swing.JFrame {
         pp_jugadores.add(modificar);
 
         eliminar.setText("Eliminar❌");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
         pp_jugadores.add(eliminar);
 
         eliminararbol.setText("Eliminar❌");
+        eliminararbol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminararbolActionPerformed(evt);
+            }
+        });
         pp_equipo.add(eliminararbol);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -639,24 +649,24 @@ public class lab6Frame extends javax.swing.JFrame {
             DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modelo.getRoot();
             Equipos equipos = new Equipos(jt_nombre.getText(), jt_equipo.getText(), jt_ciudad.getText(), jt_estadio.getText());
             equipo.add(equipos);
-
+            
             for (int i = 0; i < raiz.getChildCount(); i++) {
                 DefaultMutableTreeNode nodoPrincipal = (DefaultMutableTreeNode) raiz.getChildAt(i);
                 if (nodoPrincipal.getUserObject().equals(equipos.getPais())) {
-                    DefaultMutableTreeNode nodoEquipo = new DefaultMutableTreeNode(equipo);
+                    DefaultMutableTreeNode nodoEquipo = new DefaultMutableTreeNode(equipo.get(equipo.size() - 1));
                     nodoPrincipal.add(nodoEquipo);
                     registrado = true;
                     break;
                 }
             }
-
+            
             if (!registrado) {
                 DefaultMutableTreeNode nodoPais = new DefaultMutableTreeNode(equipos.getPais());
-                DefaultMutableTreeNode nodoEquipo = new DefaultMutableTreeNode(equipos.getEquipo());
+                DefaultMutableTreeNode nodoEquipo = new DefaultMutableTreeNode(equipo.get(equipo.size() - 1));
                 nodoPais.add(nodoEquipo);
                 raiz.add(nodoPais);
             }
-
+            
             modelo.reload();
             jt_equipo.setText("");
             jt_nombre.setText("");
@@ -668,25 +678,30 @@ public class lab6Frame extends javax.swing.JFrame {
 
     private void jb_agregarjugadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_agregarjugadorMouseClicked
         int edades = (Integer) edad.getValue();
-        if (!jt_nombrej.getText().matches(".*\\d.*")) {
-            jugador.add(new Jugadores(jt_nombrej.getText(), (String) cb_posicion.getSelectedItem(), (Integer) edad.getValue()));
-            DefaultListModel modelo = (DefaultListModel) listaJ.getModel();
-            modelo.setSize(0);
-            for (Jugadores jugador : jugador) {
-                modelo.addElement(jugador);
+        if (edades >= 15 && edades <= 45) {
+            if (!jt_nombrej.getText().matches(".*\\d.*")) {
+                jugador.add(new Jugadores(jt_nombrej.getText(), (String) cb_posicion.getSelectedItem(), (Integer) edad.getValue()));
+                DefaultListModel modelo = (DefaultListModel) listaJ.getModel();
+                modelo.setSize(0);
+                for (Jugadores jugador : jugador) {
+                    modelo.addElement(jugador);
+                }
+                JOptionPane.showMessageDialog(null, "El jugador se agrego con exito.");
+                
+                jt_nombrej.setText("");
+                cb_posicion.setSelectedIndex(0);
+                edad.setValue(15);
+                listaJ.setModel(modelo);
+                
             }
-            JOptionPane.showMessageDialog(null, "El jugador se agrego con exito.");
-
-            jt_nombrej.setText("");
-            cb_posicion.setSelectedIndex(0);
-            edad.setValue(15);
-            listaJ.setModel(modelo);
-
+        } else {
+            JOptionPane.showMessageDialog(this, "Edad debe ser entre 15 y 45.");
         }
+
     }//GEN-LAST:event_jb_agregarjugadorMouseClicked
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
-
+        
 
     }//GEN-LAST:event_modificarActionPerformed
 
@@ -699,9 +714,31 @@ public class lab6Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_listaJMouseClicked
 
     private void arbolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_arbolMouseClicked
-
+        
+        if (evt.getButton() == 3) {
+            int row = arbol.getClosestRowForLocation(evt.getX(), evt.getY());
+            arbol.setSelectionRow(row);
+            
+            nodoS = (DefaultMutableTreeNode) arbol.getSelectionPath().getLastPathComponent();
+            if (nodoS.getUserObject() instanceof Equipos) {
+                equipot = (Equipos) nodoS.getUserObject();
+                pp_equipo.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+        }
 
     }//GEN-LAST:event_arbolMouseClicked
+
+    private void eliminararbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminararbolActionPerformed
+        DefaultTreeModel modelo = (DefaultTreeModel) arbol.getModel();
+        modelo.removeNodeFromParent(nodoS);
+        modelo.reload();
+    }//GEN-LAST:event_eliminararbolActionPerformed
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        DefaultListModel modelo = (DefaultListModel) listaJ.getModel();
+        modelo.removeElementAt(listaJ.getSelectedIndex());
+        listaJ.setModel(modelo);
+    }//GEN-LAST:event_eliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -737,49 +774,33 @@ public class lab6Frame extends javax.swing.JFrame {
             }
         });
     }
-
+    
     public void crearEquipos() {
         Equipos.setModal(true);
         Equipos.pack();
         Equipos.setLocationRelativeTo(null);
         Equipos.setVisible(true);
     }
-
+    
     public void crearJugadores() {
         Jugadores.setModal(true);
         Jugadores.pack();
         Jugadores.setLocationRelativeTo(null);
         Jugadores.setVisible(true);
     }
-
+    
     public void hacerTransferencias() {
         Transferencia.setModal(true);
         Transferencia.pack();
         Transferencia.setLocationRelativeTo(null);
         Transferencia.setVisible(true);
     }
-
+    
     public void verAyuda() {
         Ayuda.setModal(true);
         Ayuda.pack();
         Ayuda.setLocationRelativeTo(null);
         Ayuda.setVisible(true);
-    }
-
-    public static boolean validarSoloLetras(String texto) {
-        char[] numeros = "0123654789".toCharArray();
-        char[] letrasTexto = texto.toCharArray();
-        ArrayList<Character> listaTexto = new ArrayList();
-        for (char c : letrasTexto) {
-            listaTexto.add(c);
-        }
-
-        for (int i = 0; i < numeros.length; i++) {
-            if (listaTexto.contains(i)) {
-                return false;
-            }
-        }
-        return true;
     }
 
 
@@ -844,5 +865,5 @@ public static ArrayList<Jugadores> jugador = new ArrayList();
     DefaultMutableTreeNode nodoS;
     Jugadores jugadort;
     Equipos equipot;
-
+    
 }
